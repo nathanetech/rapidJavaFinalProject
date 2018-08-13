@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Quiz Questions for Chapter #{javaQuizBean.chapterNo}</title>
+        <style>
+            
+            .border{
+                border: 2px solid #0094ff;
+                margin-left: auto;
+                margin-right: auto;
+                width: 90%;
+                max-width: 800px;
+                border-color: #edc100;
+            }
+            .h3{
+                color: white;
+                font-family: Helvetica, sans-serif;
+                background: #edc100;
+                border-color: #edc100;
+                text-align: center;
+                margin-bottom: 0.5em;
+                background-color: navy
+            }
+            .maincontentstyle {
+                padding-right: 1em; padding-left: 1.5em; background:
+                    white repeat-x;
+                padding-bottom: 1em; width: auto; padding-top: 1em ;
+                white-space:pre-wrap;
+            }
+            .smallh3style {
+                color: white; font-family: Helvetica, sans-serif;
+                background: #edc100;
+                border-color: #edc100; text-align: center;
+                margin-bottom: 0.5em; font-size: 90%
+            }
+            .questionnumber {font-family: "Arial Black", monospace;
+                             font-size: 100%; color: #800080; font-weight: bold}
+
+        </style>
+    </h:head>
+    <h:body>
+        <h3 style = "text-align: center; margin-bottom: 0.2em; color:
+            navy; font-family: Verdana, Helvetica, sans-serif">
+            Introduction to Java Programming, Eleventh Edition.
+            <a href="http:www.cs.armstrong.edu/liang"
+               style="color:green; text-decoration: none">
+                Y. Daniel Liang</a>
+        </h3>
+        <br /> <br />
+        <p align="center">
+            This quiz is for students to practice. A large number of
+            additional quiz is available for instructors from the Instructor's
+            Resource Website.
+        </p>
+        <div class = "border">
+            <h:form>
+                <p align="center">
+                    <h:outputText value="Select a chapter" style="font-family: Verdana, Helvetica, sans-serif; font-weight: bold; font-size: 14px; color: navy"></h:outputText>
+                    <br/>
+                    
+                    <h:selectOneMenu value="#{javaQuizBean.chapterNo}">
+                        <f:selectItems
+                            value="#{javaQuizBean.favChapterValue}" var="c"
+                            itemLabel="#{c.CLbl}"
+                            itemValue="#{c.CValue}" />
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:commandButton value="Load New Chapter"
+                                     rendered="#{!javaQuizBean.showLogin}" action =
+                                     "#{javaQuizBean.changeChapter()}" style="background: green; color: white;
+                                     font-size: 85%; margin-top: 5px; margin-left: 5px; border: none"/>
+                   <br/>
+                    <h:outputText id="label" escape="false"
+                                  value="#{javaQuizBean.label}"
+                                  style="color: green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText> <br/>
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="Username: "
+                                  style="color:green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText>
+                    <h:inputText rendered="#{javaQuizBean.showLogin}"
+                                 value ="#{javaQuizBean.username}"/>
+                    <br /><br />
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="Password: "
+                                  style="color:green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText>
+                    <h:inputSecret rendered="#{javaQuizBean.showLogin}"
+                                   value="#{javaQuizBean.password}"/>
+                    <br /><br />
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="Use if creating a new user"
+                                  style="font-family: Verdana, Helvetica, sans-serif; font-weight: bold; font-size: 14px; color: navy"></h:outputText>
+                    <br />
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="First Name:"
+                                  style="color:green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText><h:inputText
+                        rendered="#{javaQuizBean.showLogin}" value="#{javaQuizBean.firstName}"/>
+                    <br />
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="Last Name:"
+                                  style="color:green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText><h:inputText
+                        rendered="#{javaQuizBean.showLogin}" value="#{javaQuizBean.lastName}"/>
+                    <br />
+                    <h:outputText rendered="#{javaQuizBean.showLogin}"
+                                  value="Middle Initial:"
+                                  style="color:green; text-decoration: none; font-family: Verdana, Helvetica, sans-serif; font-size: 12px"></h:outputText><h:inputText
+                        rendered="#{javaQuizBean.showLogin}" maxlength="1"
+                        value="#{javaQuizBean.mi}"/>
+                    <br /><br />
+                    <h:commandButton value="Login"
+                                     rendered="#{javaQuizBean.showLogin}" action = "#{javaQuizBean.login()}"
+                                     style="background: green; color: white; font-size: 85%; margin-top:
+                                     5px; margin-left: 5px; border: none"/>
+                    <h:commandButton value="Create New User"
+                                     rendered="#{javaQuizBean.showLogin}" action =
+                                     "#{javaQuizBean.createNewUser()}" style="background: green; color: white;
+                                     font-size: 85%; margin-top: 5px; margin-left: 5px; border: none"/>
+                    <h:commandButton value="Clear"
+                                     rendered="#{javaQuizBean.showLogin}" action = "#{javaQuizBean.clear()}"
+                                     style="background: green; color: white; font-size: 85%; margin-top:
+                                     5px; margin-left: 5px; border: none"/>
+                    <h:commandButton value="Return to Login"
+                                     rendered="#{!javaQuizBean.showLogin}" action = "#{javaQuizBean.clear()}"
+                                     style="background: green; color: white; font-size: 85%; margin-top:
+                                     5px; margin-left: 5px; border: none"/>
+                    
+                    
+                </p>
+                
+                <div class ="maincontentstyle">
+                    <ui:repeat value="#{javaQuizBean.questionList}" var="question">
+                        <h:outputText  value= "#{javaQuizBean.chapterNo}.#{question.ID} " style="color: purple; font-weight: bold; font-style: italic"></h:outputText>
+                        <h:outputText  value="#{question.questionText}"></h:outputText>
+                        
+                        <!-- RADIO BUTTONS -->
+                        <h:selectOneRadio value="#{question.answer}" rendered="#{question.cempty and question.dempty and question.eempty
+                                                      and !question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                            <f:selectItem itemValue ="d" itemLabel="#{question.d}" />
+                            <f:selectItem itemValue ="e" itemLabel="#{question.e}" />
+                        </h:selectOneRadio>
+
+                        <h:selectOneRadio value="#{question.answer}" rendered="#{question.cempty and question.dempty and !question.eempty
+                                                      and !question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                            <f:selectItem itemValue ="d" itemLabel="#{question.d}" />
+                        </h:selectOneRadio>
+
+                        <h:selectOneRadio value="#{question.answer}" rendered="#{question.cempty and !question.dempty and !question.eempty
+                                                      and !question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                        </h:selectOneRadio>
+
+                        <h:selectOneRadio value="#{question.answer}" rendered="#{!question.cempty and !question.dempty and !question.eempty
+                                                      and !question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                        </h:selectOneRadio>
+
+                        <!-- CHECK BOXES -->
+                        <h:selectManyCheckbox
+                            value="#{question.answerSet}" rendered="#{question.cempty and
+                                     question.dempty and question.eempty and question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                            <f:selectItem itemValue ="d" itemLabel="#{question.d}" />
+                            <f:selectItem itemValue ="e" itemLabel="#{question.e}" />
+                        </h:selectManyCheckbox>
+
+                        <h:selectManyCheckbox
+                            value="#{question.answerSet}" rendered="#{question.cempty and
+                                     question.dempty and !question.eempty and question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                            <f:selectItem itemValue ="d" itemLabel="#{question.d}" />
+                        </h:selectManyCheckbox>
+
+                        <h:selectManyCheckbox
+                            value="#{question.answerSet}" rendered="#{question.cempty and
+                                     !question.dempty and !question.eempty and question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                            <f:selectItem itemValue ="c" itemLabel="#{question.c}" />
+                        </h:selectManyCheckbox>
+
+                        <h:selectManyCheckbox
+                            value="#{question.answerSet}" rendered="#{!question.cempty and
+                                     !question.dempty and !question.eempty and question.isMultiChoice}" layout = "pagedirection">
+                            <f:selectItem itemValue ="a" itemLabel="#{question.a}" />
+                            <f:selectItem itemValue ="b" itemLabel="#{question.b}" />
+                        </h:selectManyCheckbox>
+                        
+                        <h:commandButton class="button" value ="Check answer for Question #{question.ID}" disabled = "#{question.isRight}"
+                                         action ="#{question.checkAnswer()}" style="background: green; color:
+                                         white; font-size: 85%; margin-top: 5px; margin-left: 5px; border:
+                                         none; float: left" />
+                        <br />
+                        <h:graphicImage library="image" name="right.png" rendered="#{question.isRight and question.isAnswered}" style="width: 20px; height: auto"/>
+                        <h:graphicImage library="image" name="wrong.png" rendered="#{!question.isRight and question.isAnswered}" style="width: 20px; height: auto"/>
+                        <br /><br />
+                    </ui:repeat>
+                    
+                    <h:commandButton class="button"
+                                     rendered="#{!javaQuizBean.showLogin}" value ="Check all answers for Chapter #{javaQuizBean.chapterNo}" action
+                                     ="#{javaQuizBean.checkAllQuestions()}" style="background: green; color:
+                                     white; font-size: 85%; margin-top: 5px; margin-left: 5px; border:
+                                     none" />
+                    
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
